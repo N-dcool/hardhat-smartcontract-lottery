@@ -4,7 +4,7 @@ pragma solidity ^0.8.7;
 
 import "@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol";
-import "@chainlink/contracts/src/v0.8/interfaces/AutomationCompatibleInterface.sol";
+import "@chainlink/contracts/src/v0.8/interfaces/KeeperCompatibleInterface.sol";
 
 /* custom errors */
 error Raffle__NotEnoughETHEntered();
@@ -17,7 +17,7 @@ error Raffle__UpkeepNotNeeded(uint currentBalance, uint256 numPlayers, uint256 r
  * @notice This contract is for creating a sample raffle contract
  * @dev This implements the Chainlink VRF Version 2
  */
-contract Raffle is VRFConsumerBaseV2, AutomationCompatibleInterface {
+contract Raffle is VRFConsumerBaseV2, KeeperCompatibleInterface {
     /* Types declerations */
     enum RaffleState {
         OPEN,
@@ -175,6 +175,10 @@ contract Raffle is VRFConsumerBaseV2, AutomationCompatibleInterface {
 
     function getRequestConfirmation() public pure returns (uint256) {
         return REQUEST_CONFIRMATIONS;
+    }
+
+    function getInterval() public view returns (uint256) {
+        return i_interval;
     }
 }
 

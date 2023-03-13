@@ -10,7 +10,7 @@ const GAS_PRICE_LINK = 1e9; //link per gas or calculated value based on the gas 
 
 module.exports = async function ({ getNamedAccounts, deployments }) {
     const { deploy, log } = deployments;
-    const { deployer } = await getNamedAccounts;
+    const { deployer } = await getNamedAccounts();
     const args = [BASE_FEE, GAS_PRICE_LINK];
 
     if (developmentChains.includes(network.name)) {
